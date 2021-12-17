@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Poppins";
+}
+
+header {
+    width: 100%;
+    height: 70px;
+    background-color: #3a3a3a;
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-direction: row;
+    transition: 300ms;
+}
+
+header > a,
+header button {
+    color: white;
+    margin: 0 15px;
+    font-size: 1.3em;
+}
+
+header button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+/* Ici pour positionner comme on veut .content , on met une position relative à son parent.
+Mainteant .content va se positionner par à dropdown1 */
+header .dropdown-1 {
+    position: relative;
+    height: 100%; /* Ici on se met une hauteur car content se refère au button pas à la navbar.
+    Du coup onglet 3 n'est plus aligné donc on va mettre un display flex */
+    display: flex;
+}
+/* Pour cacher les sous onglets */
+header .dropdown-1 .content {
+    display: none;
+}
+/* Ici on les fait s'afficher que au survol de dropdown donc de l'onglet 3 */
+header .dropdown-1:hover .content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgb(245, 245, 245);
+    /* Ici on veut que notre sous menu soit en bas de la navbar donc on va le positionner avec un top qui fait la meme hauteur que la navbar */
+    top: 70px; /*  La navbar a une hauteur de 70px */
+    width: 120%;
+    padding: 8px 15px;
+    box-sizing: border-box;
+}
+
+header .content a {
+    color: black;
+}
+/* Ici on cache l'icone hamburger car on le veut que pour le responsive */
+header .icon {
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 600px) {
+    /* Donc ici on fait disparait les onglets */
+    header > a,
+    header button {
+        display: none;
+    }
+    /* Ici on fait apparaitre l'icone hamburger */
+    header .icon {
+        display: block;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        width: 5% !important;
+        top: 20px;
+        padding: 0 !important;
+    }
+    header.responsive > a {
+        padding: 10px 0;
+    }
+    /* Ici on dit que si la header à la class responsive alors j'affiche ces élèments */
+    header.responsive > a,
+    header.responsive .dropdown-1 {
+        display: block;
+        width: 100%;
+        
+    }
+    header.responsive button {
+        display: block;
+        padding: 10px 0;
+    }
+    /* Ici on veut que ça soit en colonne  */
+    header {
+        flex-direction: column;
+        min-height: 70px;
+        /* Ici on doit changer la hauteur pour afficher tout donc enleve les 70px pour que ça prenne tout la hauteur nécessaire avec des % */
+        height: 100%;
+        align-items: flex-start;
+    }
+    /* Ici on ne veut plus la position absolute on veut que ça fasse un onglet */
+    header .dropdown-1:hover .content {
+        position: relative;
+        width: 100%;
+        top: 0;
+        padding-left: 30px;
+    }
+}
